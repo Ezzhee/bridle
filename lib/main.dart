@@ -13,7 +13,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         body: Center(
-          child:Title("hus", HitType.hit)
+          child: GamePage()
           ),
         appBar: AppBar(
           title: Align(
@@ -48,6 +48,23 @@ class Title extends StatelessWidget {
       }
     ),
     child: Center(child: Text(letter),)
+    );
+  }
+}
+
+class GamePage extends StatelessWidget {
+  GamePage({super.key});
+  final Game _game = Game(); // from game.dart
+  
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.all(8.0),
+      child: Column(
+      spacing: 5.0, 
+      children: [for (final guess in _game.guesses)
+      Row(children: [for (final x in guess)
+      Title(x.char, x.type)])],)
     );
   }
 }
