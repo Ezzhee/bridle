@@ -67,9 +67,9 @@ class GamePage extends StatelessWidget {
             Row(children: [
               for (final x in guess) Title(x.char, x.type)]
               ),
-            GuessInput (onSubmitGuess: (guess);{
-              print(guess)
-            })],)
+            GuessInput (onSubmitGuess: (guess) {
+              print(guess);
+            }),],)
     );
   }
 }
