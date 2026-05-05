@@ -33,9 +33,11 @@ class Title extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AnimatedContainer(
       width: 60,
       height: 60,
+      duration: Duration(milliseconds: 1600),
+      curve: Curves.bounceIn,
       decoration: BoxDecoration(
         border: Border.all(
           color:Colors.grey.shade300
@@ -52,10 +54,16 @@ class Title extends StatelessWidget {
   }
 }
 
-class GamePage extends StatelessWidget {
+class GamePage extends StatefulWidget {
   GamePage({super.key});
+
+  @override
+  State<GamePage> createState() => _GamePageState();
+  }
+
+class _GamePageState extends State<GamePage> {
   final Game _game = Game(); // from game.dart
-  
+    
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -67,12 +75,15 @@ class GamePage extends StatelessWidget {
             Row(children: [
               for (final x in guess) Title(x.char, x.type)]
               ),
-            GuessInput (onSubmitGuess: (guess) {
-              print(guess);
+            GuessInput (onSubmitGuess: (text) {
+              setState((){
+                _game.guess(text);
+              });
             }),],)
     );
   }
 }
+
 
 class GuessInput extends StatelessWidget {
   final FocusNode _focus = FocusNode();
